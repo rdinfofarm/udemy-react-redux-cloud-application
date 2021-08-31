@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './index.css'
 import reducer from './reducers'
@@ -13,6 +14,7 @@ import EventsIndex from './components/events_index'
 import EventsNew from './components/events_new'
 import EventsShow from './components/events_show'
 import reportWebVitals from './reportWebVitals'
+import muiThemeable from 'material-ui/styles/muiThemeable'
 
 const enhancer = process.env.NODE_ENV === 'development' ?
   composeWithDevTools(applyMiddleware(thunk)) : applyMiddleware(thunk)
@@ -20,6 +22,7 @@ const store = createStore(reducer, enhancer);
 
 ReactDOM.render(
   <React.StrictMode>
+    <MuiThemeProvider>
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
@@ -30,6 +33,7 @@ ReactDOM.render(
         </Switch>
       </BrowserRouter>
     </Provider>
+    </MuiThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
